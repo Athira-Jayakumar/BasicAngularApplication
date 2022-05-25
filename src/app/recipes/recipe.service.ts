@@ -3,9 +3,11 @@ import {  Injectable} from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 import { recipes } from './recipe.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { Subject } from 'rxjs';
 @Injectable()
 export class RecipeService {
     //recipeSelected= new Subject<recipes>();
+    recipesChanged = new Subject<recipes[]>()
 
     private recipes: recipes[] =[
         new recipes('Tasty Chocolate Pancakes Recipe', 
@@ -45,4 +47,17 @@ export class RecipeService {
           this.slService.addIngredients(ingredients);
 
       }
+      addRecipe(recipe:recipes){
+          this.recipes.push(recipe);
+          this.recipesChanged.next(this.recipes.slice());
+
+      }
+      updateRecipe(index: number, newRecipe:recipes){
+          this.recipes[index] = newRecipe;
+          this.recipesChanged.next(this.recipes.slice());
+        }
+        deleteRecipe(index: number){
+            this.recipes.splice(index,1);
+            this.recipesChanged.next(this.recipes.slice());
+        }
 }
