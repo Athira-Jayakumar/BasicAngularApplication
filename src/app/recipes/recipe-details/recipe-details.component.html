@@ -1,14 +1,15 @@
 <div class="row">
     <div class="col-xs-12">
         <img [src]="recipe.imagePath"
-         alt="{{ recipe.name}}"
+         alt="{{ recipe.name }}"
           class="img-responsive"
           style="max-height: 400px;">
     </div>
 </div>
 <div class="row">
     <div class="col-xs-12">
-        <h1>{{ recipe.name }}</h1>
+                                                    <!-- here pipe is used -->
+        <i><h1>{{ recipe.name | uppercase }}</h1></i>                                              
     </div>
 </div>
 <div class="row">
@@ -28,8 +29,10 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xs-12">
-         {{ recipe.description }}
+    <div class="col-xs-12"><hr>
+                                                       <!-- here pipe is used -->
+       <b> <i> {{ recipe.description | uppercase }}</i></b>  
+       <hr>                                          
     </div>
 </div>
 <div>
